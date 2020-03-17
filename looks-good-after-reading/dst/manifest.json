@@ -22,5 +22,5 @@
         "*.png"
     ],
 
-    "permissions": ["storage", "contextMenus", "tabs", "*://qiita.com/*", "chrome-extension://*"]
+    "permissions": ["storage", "contextMenus", "*://qiita.com/*", "chrome-extension://*"]
 }
