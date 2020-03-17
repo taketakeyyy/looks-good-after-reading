@@ -23,7 +23,7 @@ module.exports = {
         // モジュールバンドルを行った結果を出力する場所やファイル名の指定
         // "__dirname"はこのファイルが存在するディレクトリを表すnode.jsで定義済みの定数
         path: path.join(__dirname,'dst/bin'),
-        filename: 'js/[name].js'  // [name]は、entryのプロパティ名（content_scripts）
+        filename: '[name].js'  // [name]は、entryのプロパティ名（content_scripts）
     },
     // モジュールとして扱いたいファイルの拡張子を指定する
     // 例えば「import Foo from './foo'」という記述に対して"foo.ts"という名前のファイルをモジュールとして探す

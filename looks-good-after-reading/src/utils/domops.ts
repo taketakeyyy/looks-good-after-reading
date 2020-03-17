@@ -1,6 +1,22 @@
 const util: any = require('./util.ts');
 const storage: any = require('./storage.ts');
 
+function make_fukidashi(parent: Element) {
+    /*ふきだしのDOMを作成する*/
+    const fukidashi = document.createElement("p");
+    fukidashi.innerHTML = "この記事を全部読むまでLGTMすることはできません"
+    fukidashi.setAttribute("class", "fukidashi");
+    parent.insertBefore(fukidashi, parent.firstChild);
+}
+
+function delete_fukidashi_if_needed(parent: Element) {
+    /*ふきだしのDOMを削除する*/
+    const elems =  parent.getElementsByClassName("fukidashi");
+    if (elems.length !== 1) { return; }
+    elems[0].parentNode?.removeChild(elems[0]);
+}
+
+
 export function change_enable_lgtm(enable: boolean) {
     /* lgtmをクリッカブルにするかどうか */
     const run = (class_name: string, enable: boolean) => {
@@ -9,12 +25,15 @@ export function change_enable_lgtm(enable: boolean) {
             return false;
         }
 
+        const target = divs[0];
         if (enable) {
-            divs[0].setAttribute("style", "pointer-events: auto;");
+            target.setAttribute("style", "pointer-events: auto;");
+            delete_fukidashi_if_needed(target);
             return true;
         }
         else {
-            divs[0].setAttribute("style", "pointer-events: none;");
+            target.setAttribute("style", "pointer-events: none;");
+            make_fukidashi(target);
             return true;
         }
     }

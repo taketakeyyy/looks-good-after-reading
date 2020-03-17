@@ -11,16 +11,13 @@
 
     "content_scripts": [
         {
-            "js": ["bin/js/content_scripts.js", "jquery-3.4.1.min.js"],
+            "js": ["bin/content_scripts.js", "jquery-3.4.1.min.js"],
             "matches": ["http://qiita.com/*/items/*", "https://qiita.com/*/items/*"],
+            "css": ["css/content_scripts.css"],
             "run_at": "document_end",
             "all_frames": true
         }
     ],
 
-    "web_accessible_resources": [
-        "*.png"
-    ],
-
-    "permissions": ["storage", "contextMenus", "*://qiita.com/*", "chrome-extension://*"]
+    "permissions": ["storage", "*://qiita.com/*"]
 }
