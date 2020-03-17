@@ -1,0 +1,28 @@
+{
+    "name": "looks-good-after-reading",
+    "manifest_version": 2,
+    "version": "0.1.0",
+    "browser_action": {
+        "default_title": "looks-good-after-reading",
+        "default_icon": {
+            "16": "icon16.png"
+        }
+    },
+
+    "content_scripts": [
+        {
+            "js": ["bin/js/content_scripts.js", "jquery-3.4.1.min.js"],
+            "matches": ["http://qiita.com/*/items/*", "https://qiita.com/*/items/*"],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ],
+
+    "web_accessible_resources": [
+        "*.png"
+    ],
+
+    "permissions": ["storage", "contextMenus", "tabs", "*://qiita.jp/*", "chrome-extension://*"]
+
+
+}
