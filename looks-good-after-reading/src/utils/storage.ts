@@ -1,10 +1,8 @@
 // [START function]
-export function async_load_storage(){
+export function async_load_storage(): Promise<{}>{
     return new Promise(function (resolve, reject) {
         chrome.storage.sync.get(null, function(loaded_data){
-            console.log(loaded_data);
-            resolve();
-            return;
+            resolve(loaded_data);
         });
     });
 }
@@ -22,11 +20,10 @@ export function save_article_I_have_read(article_id: string){
     */
     // 現在の状態を保存する
     // まず読み込んで、追加して、保存する
-    let storage_data = async_load_storage();
-    storage_data[article_id] = true;
-    // saving_data["article_read"] = language_order;
-
-    // chrome.storage.sync.set(saving_data);
+    async_load_storage().then(function(storage_data: any){
+        storage_data[article_id] = true;
+        chrome.storage.sync.set(storage_data);
+    });
 }
 // [END function]
 

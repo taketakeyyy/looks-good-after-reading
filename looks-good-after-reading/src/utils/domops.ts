@@ -1,34 +1,26 @@
-import { async_load_storage } from "./storage";
-
+const util: any = require('./util.ts');
 const storage: any = require('./storage.ts');
-
-
-export function disable_lgtm(): boolean {
-    const divs = document.getElementsByClassName("it-Actions_item it-Actions_item-like likable");
-    if (divs.length != 1){
-        return false;
-    }
-
-    divs[0].setAttribute("style", "pointer-events: none;");
-    return true;
-}
-
 
 export function change_enable_lgtm(enable: boolean) {
     /* lgtmをクリッカブルにするかどうか */
-    const divs = document.getElementsByClassName("it-Actions_item it-Actions_item-like likable");
-    if (divs.length != 1){
-        return false;
+    const run = (class_name: string, enable: boolean) => {
+        const divs = document.getElementsByClassName(class_name);
+        if (divs.length != 1){
+            return false;
+        }
+
+        if (enable) {
+            divs[0].setAttribute("style", "pointer-events: auto;");
+            return true;
+        }
+        else {
+            divs[0].setAttribute("style", "pointer-events: none;");
+            return true;
+        }
     }
 
-    if (enable) {
-        divs[0].setAttribute("style", "pointer-events: auto;");
-        return true;
-    }
-    else {
-        divs[0].setAttribute("style", "pointer-events: none;");
-        return true;
-    }
+    run("it-Actions_item it-Actions_item-like likable", enable);
+    run("it-ActionsMobile_like likable", enable);
 }
 
 export function have_read(): any {
@@ -47,31 +39,20 @@ export function have_read(): any {
     const ofs = target.offset();
     if(ofs === undefined) { return false; }
     if(ofs.top < scroll_pos) {
-        // 読み終わった
+        // 読み終わったら、この記事を保存する
         change_enable_lgtm(true);
-        // 読んだことある記事を保存しておく
-        // https://qiita.com/c_r_5/items/84f19475647baf0ebe1f
-        const loc = window.location.href//.split("/")[-1];
-        const m = loc.match(/.*qiita\.com.*\/.*\/items\/(.+$)/);
-        if(m === null) {return true; }  // 保存せずに終了
 
-        return Promise.resolve()
-        .then(() => {
-            storage.async_load_storage
-        }).then(
-
-
-        );
-        save_article_read(m[1]);
-
+        const article_id = util.get_article_id();
+        if(article_id === "") { return true; }
+        storage.save_article_I_have_read(article_id);
 
         return true;
     }
     return false;
 }
 
-
-function save_article_read(artivle_id: string) {
-    const data = storage.async_load_storage();
+export function have_clicked_lgtm(): boolean{
+    /*LGTMが既にクリック済みかを判定する*/
+    const elems = document.getElementsByClassName("LgtmIcon__Lgtm-sc-1e4ee48-0 fSwhXv");
+    return (elems.length !== 0);
 }
-
