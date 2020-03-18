@@ -1,14 +1,20 @@
 {
     "name": "looks-good-after-reading",
+    "description": "This extension prohibits you from clicking the LGTM button until you finish reading the article on Qiita.",
     "manifest_version": 2,
     "version": "0.1.0",
+    "icons": {
+        "16": "icon/icon16.png",
+        "32": "icon/icon32.png",
+        "48" : "icon/icon48.png",
+        "128" : "icon/icon128.png"
+    },
+
     "browser_action": {
         "default_title": "looks-good-after-reading",
         "default_icon": {
-            "16": "icon/icon16.png",
-            "32": "icon/icon32.png",
-            "48" : "icon/icon48.png",
-            "128" : "icon/icon128.png"
+            "19": "icon/icon19.png",
+            "38": "icon/icon38.png"
         }
     },
 
@@ -22,5 +28,5 @@
         }
     ],
 
-    "permissions": ["storage", "*://qiita.com/*"]
+    "permissions": ["storage"]
 }
