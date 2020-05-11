@@ -21,7 +21,7 @@ node.js
 
 Dowonload for Windows: https://nodejs.org/ja/
 Install Development Environment
-Now, your current directory is the same to solve-later-again/package.json. Type following:
+Now, your current directory is the same to looks-good-after-reading/package.json. Type following:
 
 > npm ci
 
@@ -32,4 +32,4 @@ All files to publish are looks-good-after-reading/dst/*.
 ## Publish (and Update)
 The final files to publish are looks-good-after-reading/dst/*.
 
-Zip solve-later-again/dst/ and publish on the Chrome Web Store.
+Zip looks-good-after-reading/dst/ and publish on the Chrome Web Store.
